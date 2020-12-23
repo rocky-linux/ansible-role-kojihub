@@ -11,6 +11,7 @@
     state: directory
     owner: "{{ koji_admin_localuser_name }}"
     group: "{{ koji_admin_localuser_name }}"
+    mode: '0700'
     recurse: true
 
 - name: Reset permissions

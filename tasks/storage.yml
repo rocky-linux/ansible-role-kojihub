@@ -4,6 +4,9 @@
   file:
     path: "{{ koji_mount }}"
     state: directory
+    owner: apache
+    group: apache
+    mode: '0755'
 
 - name: Mount the NFS store
   mount:
@@ -19,4 +22,5 @@
     state: directory
     owner: apache
     group: apache
+    mode: '0755'
   with_items: "{{ koji_default_directories }}"
