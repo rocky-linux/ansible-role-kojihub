@@ -1,8 +1,9 @@
 ---
 # Create the koji admin user
 - name: Create local koji admin user
-  user: "{{ koji_admin_localuser_name }}"
-  comment: "Local Koji Admin"
+  user:
+    name: "{{ koji_admin_localuser_name }}"
+    comment: "Local Koji Admin"
 
 - name: Create koji config directory
   file:

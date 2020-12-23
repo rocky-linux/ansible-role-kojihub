@@ -10,7 +10,7 @@
 
 - name: Install required packages
   yum:
-    name: {{ koji_hub_packages }}
+    name: "{{ koji_hub_packages }}"
     state: present
 
 - name: Configure koji database
