@@ -16,33 +16,47 @@
 - name: Configure koji database
   import_tasks: db.yml
 
-- name: Configure koji admin
-  import_tasks: koji-admin.yml
-  when: koji_admin_client
+- name: Configure local koji admin
+  import_tasks: koji-admin-local.yml
+  when:
+    - koji_admin_client
+    - koji_admin_localuser
+
+# This is specifically if we want the IPA account to also be an account on this
+# system. ymmv.
+- name: Configure ipa koji admin
+  import_tasks: koji-admin-ipa.yml
+  when:
+    - koji_admin_client
+    - not koji_admin_localuser
 
 - name: Configure plugins
   import_tasks: plugins.yml
   when: koji_hub_plugins
-
-- name: Configure kojira
-  import_tasks: kojira.yml
 
 - name: Configure kojihub and web
   template:
     src: "{{ item }}.j2"
     dest: "/{{ item }}"
     mode: '0644'
+    owner: root
+    group: root
   with_items:
     - etc/koji-hub/hub.conf
     - etc/kojiweb/web.conf
   notify:
     - restart_httpd
 
+- name: Configure kojira
+  import_tasks: kojira.yml
+
 - name: Configure httpd for hub and web
   template:
     src: "etc/httpd/conf.d/{{ item }}.j2"
     dest: "/etc/httpd/conf.d/{{ item }}"
     mode: '0644'
+    owner: root
+    group: root
   with_items:
     - kojihub.conf
     - kojiweb.conf
@@ -54,6 +68,9 @@
     src: "{{ koji_theme_file }}"
     dest: /
   when: koji_theme
+
+- name: Configure garbage collector
+  import_tasks: koji-gc.yml
 
 - name: User Sync from FAS
   import_tasks: user-sync.yml

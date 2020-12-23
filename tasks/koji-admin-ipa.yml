@@ -1,8 +1,5 @@
 ---
-# Create the koji admin user
-- name: Create local koji admin user
-  user: "{{ koji_admin_user }}"
-
+# Setup the IPA service account
 - name: Create koji config directory
   file:
     path: "/home/{{ koji_admin_user }}/.koji"

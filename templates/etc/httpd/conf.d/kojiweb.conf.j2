@@ -12,21 +12,6 @@ RewriteRule  ^/$    /koji [R,L]
  Header always set X-Content-Type-Options "nosniff"
  Header always set Referrer-Policy "same-origin"
 
-Alias /repos {{ koji_mount }}/repos
-<Directory "{{ koji_mount }}/repos">
-   Options Indexes FollowSymLinks
-    AllowOverride None
-#    HeaderName /header/header.html
-    <IfVersion < 2.4>
-    Order allow,deny
-    Allow from all
-    </IfVersion>
-    <IfVersion >= 2.4>
-    IndexOptions FancyIndexing VersionSort NameWidth=* HTMLTable Charset=UTF-8
-    Require all granted
-    </IfVersion>
-</Directory>
-
 # Python 3 Cheetah expectes unicode everywhere, apache's default lang is C
 # which is not sufficient to open our templates
 WSGIDaemonProcess koji lang=C.UTF-8
@@ -56,13 +41,6 @@ WSGIProcessGroup koji
     ErrorDocument 401 /koji-static/errors/unauthorized.html
 </Location>
 
-# uncomment this to enable authentication via SSL client certificates
-# <Location /koji/login>
-#     SSLVerifyClient require
-#     SSLVerifyDepth  10
-#     SSLOptions +StdEnvVars
-# </Location>
-
 Alias /koji-static/ "/usr/share/koji-web/static/"
 
 <Directory "/usr/share/koji-web/static/">
@@ -73,6 +51,21 @@ Alias /koji-static/ "/usr/share/koji-web/static/"
         Allow from all
     </IfVersion>
     <IfVersion >= 2.4>
+        Require all granted
+    </IfVersion>
+</Directory>
+
+Alias /repos {{ koji_mount }}/repos
+<Directory "{{ koji_mount }}/repos">
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    #HeaderName /header/header.html
+    <IfVersion < 2.4>
+        Order allow,deny
+        Allow from all
+    </IfVersion>
+    <IfVersion >= 2.4>
+        IndexOptions FancyIndexing VersionSort NameWidth=* HTMLTable Charset=UTF-8
         Require all granted
     </IfVersion>
 </Directory>

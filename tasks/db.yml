@@ -1,5 +1,5 @@
 ---
-# Note: We do not install postgresql. It's up to you to do so.
+# Note: We do not install postgresql. It's up to you to do so, whether locally or not.
 - name: Template for koji admin and kojira
   template:
     src: koji-pgsql.sql.j2

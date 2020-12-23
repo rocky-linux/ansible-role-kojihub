@@ -13,13 +13,13 @@ DBHost = {{ koji_db_host }}
 DBPass = {{ koji_db_pass }}
 KojiDir = {{ koji_mount }}
 
-AuthPrincipal host/kojihub@ROCKYLINUX.ORG
-AuthKeytab /etc/koji.keytab
-ProxyPrincipals koji/kojiweb@ROCKYLINUX.ORG
-HostPrincipalFormat compile/%s@ROCKYLINUX.ORG
+AuthPrincipal {{ koji_hub_principal }}
+AuthKeytab {{ koji_hub_keytab }}
+ProxyPrincipals {{ koji_hub_proxy_principals }}
+HostPrincipalFormat {{ koji_hub_principal_format }}
 
 ##  Other options  ##
-LoginCreatesUser = Off
+LoginCreatesUser = On
 KojiWebURL = {{ koji_web_url }}
 
 # The domain name that will be appended to Koji usernames
