@@ -18,17 +18,7 @@
 
 - name: Configure local koji admin
   import_tasks: koji-admin-local.yml
-  when:
-    - koji_admin_client
-    - koji_admin_localuser
-
-# This is specifically if we want the IPA account to also be an account on this
-# system. ymmv.
-- name: Configure ipa koji admin
-  import_tasks: koji-admin-ipa.yml
-  when:
-    - koji_admin_client
-    - not koji_admin_localuser
+  when: koji_admin_client
 
 - name: Configure plugins
   import_tasks: plugins.yml
