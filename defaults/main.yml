@@ -36,7 +36,7 @@ koji_files_url: https://koji.rockylinux.org/kojifiles
 
 # This should be changed before deployment
 koji_hub_secret: cK5XCuzMSXJfgA7yFvXkGwFu
-koji_web_cacert: /etc/pki/tls/certs/chain.crt
+koji_web_cacert: /etc/pki/tls/certs/ca-bundle.crt
 koji_web_tls_cert: /etc/pki/tls/certs/koji.rockylinux.org.crt
 koji_web_tls_key: /etc/pki/tls/private/koji.rockylinux.org.key
 
