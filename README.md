@@ -1,7 +1,11 @@
 CI Badge
 
-# Ansible template role
-basic Role to use going forward because I forget pieces
+# Kojihub Role
+This role installs kojihub and kojiweb. Note that it does NOT install the database. The database must be installed from a different role or playbook method. This role also assumes you are using a Kerberos infrastructure, such as FreeIPA.
+
+FAS is not yet implemented.
+
+Ansible 2.10 users: You will need the community.general collection installed.
 
 ## Getting started
 Ensure all dependencies are installed and then follow the below process

@@ -1,0 +1,10 @@
+---
+- name: restart_kojira
+  service:
+    name: kojira
+    state: restarted
+
+- name: restart_httpd
+  service:
+    name: httpd
+    state: restarted

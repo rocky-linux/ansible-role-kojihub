@@ -1,0 +1,23 @@
+[web]
+SiteName = {{ koji_sitename }}
+{% if koji_custom_theme %}
+KojiTheme = {{ koji_theme }}
+{% endif %}
+
+# Key urls
+KojiHubURL = {{ koji_hub_url }}
+KojiFilesURL = {{ koji_files_url }}
+
+# Kerberos authentication options
+WebPrincipal = koji/web@ROCKYLINUX.ORG
+WebKeytab = /etc/httpd.keytab
+WebCCache = /var/tmp/kojiweb.ccache
+# The service name of the principal being used by the hub
+KrbService = host
+
+LoginTimeout = 72
+
+# This must be changed and uncommented before deployment
+Secret = {{ koji_hub_secret }}
+
+LibPath = /usr/share/koji-web/lib

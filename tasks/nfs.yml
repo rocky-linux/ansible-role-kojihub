@@ -1,0 +1,21 @@
+---
+
+- name: Ensure the koji mountpoint exists
+  file:
+    path: "{{ koji_mount }}"
+    state: directory
+
+- name: Mount the NFS store
+  mount:
+    path: "{{ koji_mount }}"
+    src: "{{ koji_nfs_path }}"
+    fstype: nfs
+    state: mounted
+
+- name: Create required default directories
+  file:
+    path: "{{ koji_mount }}/{{ item }}"
+    state: directory
+    owner: apache
+    group: apache
+  with_items: "{{ koji_default_directories }}"

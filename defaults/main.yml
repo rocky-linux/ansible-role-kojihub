@@ -1,2 +1,68 @@
 ---
 # ansible default variables - most variables live here
+koji_hub_packages:
+  - koji
+  - koji-hub
+  - koji-hub-plugins
+  - koji-web
+  - koji-utils
+  - git
+  - gnupg2
+  - python3-paho-mqtt
+  - nfs-utils
+
+koji_default_directories:
+  - packages
+  - repos
+  - work
+  - scratch
+  - repos-dist
+
+koji_db_name: koji
+koji_db_user: koji
+koji_db_pass: ThisIsNotThePassword!
+koji_db_host: localhost
+
+# Web
+koji_sitename: Rocky Linux Build Service
+koji_theme: false
+koji_theme_name: rocky
+koji_theme_file: rocky.tar.gz
+koji_web_url: https://koji.rockylinux.org/koji
+koji_hub_url: https://koji.rockylinux.org/kojihub
+koji_files_url: https://koji.rockylinux.org/kojifiles
+
+# This should be changed before deployment
+koji_hub_secret: cK5XCuzMSXJfgA7yFvXkGwFu
+koji_web_cacert: /etc/pki/tls/certs/chain.crt
+koji_web_tls_cert: /etc/pki/tls/certs/koji.rockylinux.org.crt
+koji_web_tls_key: /etc/pki/tls/private/koji.rockylinux.org.key
+
+# Kojira
+koji_kojira: true
+koji_kojira_user: kojira
+koji_kojira_principal: koji/kojiria@ROCKYLINUX.ORG
+koji_kojira_keytab: /etc/kojira.keytab
+
+# Storage
+koji_mount: /mnt/koji
+koji_nfs_path: nfs.rockylinux.org:/exports/koji
+
+# Koji Admin
+koji_admin_client: true
+koji_admin_user: rockykoji
+koji_admin_keytab: rockykoji@ROCKYLINUX.ORG
+
+# Koji FAS Syncing
+# This isn't implemented yet
+koji_fas_sync: false
+koji_fas_url: https://accounts.rockylinux.org
+
+# Koji Plugins
+koji_hub_plugins: false
+koji_hub_plugins_list: []
+
+koji_hub_plugin_mqtt_host: mqtt.rockylinux.org
+koji_hub_plugin_mqtt_topic: koji
+koji_hub_plugin_mqtt_excluded_tags:
+  - testing-tag
