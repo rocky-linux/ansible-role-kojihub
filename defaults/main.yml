@@ -47,6 +47,7 @@ koji_kojira_principal: koji/kojira@ROCKYLINUX.ORG
 koji_kojira_keytab: /etc/koji.keytab
 
 # Storage
+koji_nfs: true
 koji_mount: /mnt/koji
 koji_nfs_path: nfs.rockylinux.org:/export/koji
 

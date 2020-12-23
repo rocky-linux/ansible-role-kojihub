@@ -1,5 +1,5 @@
 ---
-
+# Storage
 - name: Ensure the koji mountpoint exists
   file:
     path: "{{ koji_mount }}"
@@ -11,6 +11,7 @@
     src: "{{ koji_nfs_path }}"
     fstype: nfs
     state: mounted
+  when: koji_nfs
 
 - name: Create required default directories
   file:

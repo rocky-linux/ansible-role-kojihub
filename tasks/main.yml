@@ -5,8 +5,8 @@
 - name: Apply required SELinux booleans
   import_tasks: selinux_boolean.yml
 
-- name: Ensure NFS is mounted
-  import_tasks: nfs.yml
+- name: Ensure Storage is ready
+  import_tasks: storage.yml
 
 - name: Install required packages
   yum:
