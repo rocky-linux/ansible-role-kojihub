@@ -13,10 +13,10 @@ DBHost = {{ koji_db_host }}
 DBPass = {{ koji_db_pass }}
 KojiDir = {{ koji_mount }}
 
-AuthPrincipal {{ koji_hub_principal }}
-AuthKeytab {{ koji_hub_keytab }}
-ProxyPrincipals {{ koji_hub_proxy_principals }}
-HostPrincipalFormat {{ koji_hub_principal_format }}
+AuthPrincipal = {{ koji_hub_principal }}
+AuthKeytab = {{ koji_hub_keytab }}
+ProxyPrincipals = {{ koji_hub_proxy_principals }}
+HostPrincipalFormat = {{ koji_hub_principal_format }}
 
 ##  Other options  ##
 LoginCreatesUser = On
