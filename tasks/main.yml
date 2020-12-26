@@ -53,6 +53,16 @@
   notify:
     - restart_httpd
 
+- name: Configure robots.txt
+  copy:
+    src: "var/www/html/robots.txt"
+    dest: "/var/www/html/robots.txt"
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart_httpd
+
 - name: Deploy custom theme for koji
   unarchive:
     src: "{{ koji_theme_file }}"
