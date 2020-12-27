@@ -47,6 +47,13 @@ koji_kojira_user_kerb: koji/kojira
 koji_kojira_principal: koji/kojira@ROCKYLINUX.ORG
 koji_kojira_keytab: /etc/koji.keytab
 
+# MBS
+koji_mbs: true
+koji_mbs_user: mbs
+koji_mbs_user_kerb: mbs/mbs.rockylinux.org
+koji_mbs_principal: mbs/mbs.rockylinux.org@ROCKYLINUX.ORG
+koji_mbs_keytab: /etc/mbs.keytab
+
 # Storage
 koji_nfs: true
 koji_mount: /mnt/koji
