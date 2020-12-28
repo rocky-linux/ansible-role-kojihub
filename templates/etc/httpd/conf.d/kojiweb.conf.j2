@@ -5,7 +5,7 @@ Alias /koji "/usr/share/koji-web/scripts/wsgi_publisher.py"
 RewriteEngine on
 RewriteCond %{HTTPS} off
 RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=302,L]
-RewriteRule  ^/$    /koji [R,L] 
+RewriteRule  ^/$    /koji [R,L]
 
  Header always set X-Frame-Options "SAMEORIGIN"
  Header always set X-Xss-Protection "1; mode=block"
@@ -69,4 +69,3 @@ Alias /repos {{ koji_mount }}/repos
         Require all granted
     </IfVersion>
 </Directory>
-
