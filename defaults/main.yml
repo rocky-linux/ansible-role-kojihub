@@ -19,6 +19,7 @@ koji_default_directories:
   - work
   - scratch
   - repos-dist
+  - compose
 
 koji_db_name: koji
 koji_db_user: koji
