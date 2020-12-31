@@ -74,7 +74,7 @@ koji_admin_localuser_name: koji
 
 # Hub Settings
 koji_hub_principal: "host/kojihub@ROCKYLINUX.ORG"
-koji_hub_proxy_principals: "HTTP/{{ inventory_hostname  }}@ROCKYLINUX.ORG"
+koji_hub_proxy_principals: "HTTP/{{ inventory_hostname }}@ROCKYLINUX.ORG"
 koji_hub_keytab: /etc/keytabs/host.keytab
 koji_hub_principal_format: compile/%s@ROCKYLINUX.ORG
 # This should be sufficient even for LE
