@@ -45,7 +45,6 @@ Alias /kojifiles "{{ koji_mount }}/"
 <Location /kojihub/ssllogin>
         AuthType GSSAPI
         AuthName "GSSAPI Single Sign On Login"
-        GssapiCredStore keytab:/etc/koji.keytab
+        GssapiCredStore keytab:{{ koji_hub_keytab }}
         Require valid-user
 </Location>
-
