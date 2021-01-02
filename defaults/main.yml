@@ -12,6 +12,7 @@ koji_hub_packages:
   - nfs-utils
   - mod_ssl
   - mod_auth_gssapi
+  - sigul
 
 koji_default_directories:
   - packages
@@ -59,6 +60,12 @@ koji_mbs_keytab: /etc/keytabs/mbs.keytab
 # GC
 koji_gc_keytab: /etc/keytabs/koji-gc.keytab
 koji_gc_principal: koji-gc/koji.rockylinux.org@ROCKYLINUX.ORG
+
+# Sigul
+koji_sigul: true
+koji_sigul_user: sigul
+koji_sigul_user_kerb: sigual/sigul.rockylinux.org
+koji_sigul_principal: sigual/sigul.rockylinux.org@ROCKYLINUX.ORG
 
 # Storage
 koji_nfs: true
