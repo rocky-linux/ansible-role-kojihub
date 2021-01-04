@@ -64,8 +64,8 @@ koji_gc_principal: koji-gc/koji.rockylinux.org@ROCKYLINUX.ORG
 # Sigul
 koji_sigul: true
 koji_sigul_user: sigul
-koji_sigul_user_kerb: sigual/sigul.rockylinux.org
-koji_sigul_principal: sigual/sigul.rockylinux.org@ROCKYLINUX.ORG
+koji_sigul_user_kerb: sigul/sigul.rockylinux.org
+koji_sigul_principal: sigul/sigul.rockylinux.org@ROCKYLINUX.ORG
 
 # Storage
 koji_nfs: true
