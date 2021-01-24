@@ -21,7 +21,7 @@ server = {{ koji_hub_url }}
 weburl = {{ koji_web_url }}
 
 # We don't know what we're doing with SSL CA's yet
-#serverca =
+serverca = {{ koji_web_cacert }}
 
 # The domain name that will be appended to Koji usernames
 # when creating email notifications
