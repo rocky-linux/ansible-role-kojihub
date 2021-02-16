@@ -1,21 +1,14 @@
-#test policy file
-#earlier = higher precedence!
-
 [main]
 ; Kerberos Auth
 principal   = {{ koji_gc_principal }}
 keytab      = {{ koji_gc_keytab }}
 krb_rdns    = False
-#key_aliases =
-#    30C9ECF8    fedora-test
-#    4F2A6FD2    fedora-gold
-#    897DA07A    redhat-beta
-#    1AC70CE6    fedora-extras
+key_aliases =
+    6D745A60    signing
+    BBE2C108    testing-signing
 
-#unprotected_keys =
-#    fedora-test
-#    fedora-extras
-#    redhat-beta
+unprotected_keys =
+    testing-signing
 
 server = {{ koji_hub_url }}
 weburl = {{ koji_web_url }}
