@@ -58,6 +58,7 @@ koji_mbs_principal: mbs/mbs.rockylinux.org@ROCKYLINUX.ORG
 koji_mbs_keytab: /etc/keytabs/mbs.keytab
 
 # GC
+koji_gc_name: garbageman
 koji_gc_keytab: /etc/keytabs/koji-gc.keytab
 koji_gc_principal: koji-gc/koji.rockylinux.org@ROCKYLINUX.ORG
 
