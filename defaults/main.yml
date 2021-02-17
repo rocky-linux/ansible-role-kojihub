@@ -98,6 +98,14 @@ koji_hub_plugins: false
 koji_hub_plugins_list:
   - key_signing
 
+koji_hub_plugin_key_gpg_keyphrase: lol
+koji_hub_plugin_key_gpg_name: testing-signing
+koji_hub_plugin_key_gpg_id: bbe2c108
+koji_hub_plugin_key_build_target: "dist-rocky8 dist-rocky9"
+koji_hub_plugin_key_testing_tag: dist-rocky8-testing
+koji_hub_plugin_key_testing: "True"
+koji_hub_plugin_key_sigul_config: "/etc/koji-hub/sigul.conf"
+
 # Not implemented
 koji_hub_plugin_mqtt_host: mqtt.rockylinux.org
 koji_hub_plugin_mqtt_topic: koji

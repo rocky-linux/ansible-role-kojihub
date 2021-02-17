@@ -5,6 +5,8 @@
 # Based on another plugin, updated and refinements where needed:
 #   -> Config file introduced
 #   -> Some linting
+#
+# TODO: Hook into a vault system
 
 import sys
 import logging
@@ -28,7 +30,8 @@ gpg_key_name = CONFIG.get('signing', 'gpg_key_name')
 gpg_key_id = CONFIG.get('signing', 'gpg_key_id')
 build_target = CONFIG.get('signing', 'build_target').split()
 testing_tag = CONFIG.get('signing', 'testing_tag')
-send_to_testing = CONFIG.get('signing', 'testing')
+send_to_testing = CONFIG.get('signing', 'send_to_testing')
+sigul_config = CONFIG.get('signing', 'sigul_config')
 
 def key_signing(cbtype, *args, **kws):
     # Make sure this is a package build and nothing else
@@ -56,7 +59,8 @@ def key_signing(cbtype, *args, **kws):
     # If configured, tag for a testing repo
     if send_to_testing:
         kojifunctions.tagBuild(testing_tag,kws['build']['id'])
-        logging.getLogger('koji.plugin.key_signing').info('the package %s has been tagged to %s'%(kws['build']['name'],testing_tag))
+        logging.getLogger('koji.plugin.key_signing').info(
+                'the package %s has been tagged to %s' % (kws['build']['name'],testing_tag))
 
 def run_sigul(command):
     child = subprocess.Popen(command, stdin=subprocess.PIPE,
@@ -66,16 +70,18 @@ def run_sigul(command):
     ret = child.wait()
     logging.getLogger('koji.plugin.key_signing').info('sigul returned with code: %s',ret)
     if ret != 0:
-        logging.getLogger('koji.plugin.key_signing').error('sigul command failed: %s returned: %s',command,child.communicate())
+        logging.getLogger('koji.plugin.key_signing').error(
+                'sigul command failed: %s returned: %s',command,child.communicate())
         sys.exit(1)
 
 def key_signing_rpm(rpm_name):
     # Check to make sure the key works
-    command = "sigul --batch get-public-key %s" % gpg_key_name
+    command = "sigul -c %s --batch get-public-key %s" % (sigul_config, gpg_key_name)
     run_sigul(command)
 
     # Run the actual sign command
-    command = "sigul --batch sign-rpm --koji-only --store-in-koji --v3-signature %s %s" % (gpg_key_name, rpm_name)
+    command = ("sigul -c %s --batch sign-rpm --koji-only --store-in-koji"
+               " --v3-signature %s %s" % (sigul_config, gpg_key_name, rpm_name))
     logging.getLogger('koji.plugin.key_signing').info('running sigul command: %s',command)
     run_sigul(command)
 
