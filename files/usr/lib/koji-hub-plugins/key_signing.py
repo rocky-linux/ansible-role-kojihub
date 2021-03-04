@@ -63,10 +63,16 @@ def key_signing(cbtype, *args, **kws):
                 'the package %s has been tagged to %s' % (kws['build']['name'],testing_tag))
 
 def run_sigul(command):
-    child = subprocess.Popen(command, stdin=subprocess.PIPE,
+    passphrase_to_bytes = '{}\0'.format(passphrase).encode()
+    p = os.pipe()
+    os.write(p[1], passphrase_to_bytes)
+    os.close(p[1])
+    send_to_stdin = os.fdopen(p[0], "r")
+
+    child = subprocess.Popen(command, stdin=send_to_stdin,
                              stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE,shell=True)
-    child.stdin.write(passphrase + '\0')
+
     ret = child.wait()
     logging.getLogger('koji.plugin.key_signing').info('sigul returned with code: %s',ret)
     if ret != 0:
