@@ -11,6 +11,7 @@
 import sys
 import logging
 import subprocess
+import os
 
 import koji
 from koji.plugin import register_callback, ignore_error
