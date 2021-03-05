@@ -34,6 +34,7 @@ testing_tag = CONFIG.get('signing', 'testing_tag')
 send_to_testing = CONFIG.get('signing', 'send_to_testing')
 sigul_config = CONFIG.get('signing', 'sigul_config')
 
+@callback('postTag')
 def key_signing(cbtype, *args, **kws):
     # Make sure this is a package build and nothing else
     if kws['tag']['name'] not in build_target:
@@ -92,4 +93,4 @@ def key_signing_rpm(rpm_name):
     logging.getLogger('koji.plugin.key_signing').info('running sigul command: %s',command)
     run_sigul(command)
 
-register_callback('postTag',key_signing)
+#register_callback('postTag',key_signing)
