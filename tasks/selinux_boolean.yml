@@ -1,7 +1,6 @@
 ---
-
 - name: Enabling SELinux booleans
-  seboolean:
+  ansible.posix.seboolean:
     name: "{{ item }}"
     persistent: true
     state: true
