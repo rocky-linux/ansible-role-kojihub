@@ -1,7 +1,7 @@
 ---
 # Storage
 - name: Ensure the koji mountpoint exists
-  file:
+  ansible.builtin.file:
     path: "{{ koji_mount }}"
     state: directory
     owner: '48'
@@ -9,7 +9,7 @@
     mode: '0755'
 
 - name: Mount the NFS store
-  mount:
+  ansible.builtin.mount:
     path: "{{ koji_mount }}"
     src: "{{ koji_nfs_path }}"
     fstype: nfs
@@ -17,7 +17,7 @@
   when: koji_nfs
 
 - name: Create required default directories
-  file:
+  ansible.builtin.file:
     path: "{{ koji_mount }}/{{ item }}"
     state: directory
     owner: '48'

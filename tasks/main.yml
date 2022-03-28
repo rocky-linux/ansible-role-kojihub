@@ -9,7 +9,7 @@
   import_tasks: storage.yml
 
 - name: Install required packages
-  yum:
+  ansible.builtin.dnf:
     name: "{{ koji_hub_packages }}"
     state: present
 
@@ -25,7 +25,7 @@
   when: koji_hub_plugins
 
 - name: Configure kojihub and web
-  template:
+  ansible.builtin.template:
     src: "{{ item }}.j2"
     dest: "/{{ item }}"
     mode: '0644'
@@ -41,7 +41,7 @@
   import_tasks: kojira.yml
 
 - name: Configure httpd for hub and web
-  template:
+  ansible.builtin.template:
     src: "etc/httpd/conf.d/{{ item }}.j2"
     dest: "/etc/httpd/conf.d/{{ item }}"
     mode: '0644'
@@ -54,7 +54,7 @@
     - restart_httpd
 
 - name: Configure robots.txt
-  copy:
+  ansible.builtin.copy:
     src: "var/www/html/robots.txt"
     dest: "/var/www/html/robots.txt"
     owner: root
@@ -64,7 +64,7 @@
     - restart_httpd
 
 - name: Deploy custom theme for koji
-  unarchive:
+  ansible.builtin.unarchive:
     src: "{{ koji_theme_file }}"
     dest: /
   when: koji_theme

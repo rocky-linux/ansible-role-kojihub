@@ -1,7 +1,7 @@
 ---
 # Note: We do not install postgresql. It's up to you to do so, whether locally or not.
 - name: Template for koji admin and kojira
-  template:
+  ansible.builtin.template:
     src: koji-pgsql.sql.j2
     dest: /var/tmp/koji-pgsql.sql
     mode: '0644'

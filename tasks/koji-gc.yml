@@ -1,7 +1,7 @@
 ---
 # Configure gc
 - name: Configure garbage collector
-  template:
+  ansible.builtin.template:
     src: etc/koji-gc/koji-gc.conf.j2
     dest: /etc/koji-gc/koji-gc.conf
     owner: root
@@ -9,6 +9,6 @@
     mode: '0644'
 
 - name: Enable the gc timer
-  service:
+  ansible.builtin.service:
     name: koji-gc.timer
     enabled: true

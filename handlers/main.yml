@@ -1,10 +1,10 @@
 ---
 - name: restart_kojira
-  service:
+  ansible.builtin.service:
     name: kojira
     state: restarted
 
 - name: restart_httpd
-  service:
+  ansible.builtin.service:
     name: httpd
     state: restarted

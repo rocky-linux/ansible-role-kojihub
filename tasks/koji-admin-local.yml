@@ -1,12 +1,12 @@
 ---
 # Create the koji admin user
 - name: Create local koji admin user
-  user:
+  ansible.builtin.user:
     name: "{{ koji_admin_localuser_name }}"
     comment: "Local Koji Admin"
 
 - name: Create koji config directory
-  file:
+  ansible.builtin.file:
     path: "/home/{{ koji_admin_localuser_name }}/.koji"
     state: directory
     owner: "{{ koji_admin_localuser_name }}"
@@ -15,7 +15,7 @@
     recurse: true
 
 - name: Reset permissions
-  file:
+  ansible.builtin.file:
     path: "/home/{{ koji_admin_localuser_name }}"
     state: directory
     owner: "{{ koji_admin_localuser_name }}"
@@ -23,7 +23,7 @@
     mode: '0700'
 
 - name: Configure the koji client
-  template:
+  ansible.builtin.template:
     src: koji-client-config.j2
     dest: "/home/{{ koji_admin_localuser_name }}/.koji/config"
     owner: "{{ koji_admin_localuser_name }}"
@@ -31,7 +31,7 @@
     mode: '0644'
 
 - name: Ensuring we have our scripts store
-  file:
+  ansible.builtin.file:
     path: /opt/rocky-tools/scripts
     state: directory
     owner: "{{ koji_admin_localuser_name }}"
