@@ -20,6 +20,7 @@ WSGIProcessGroup koji
 <Directory "/usr/share/koji-web/scripts/">
     Options ExecCGI
     SetHandler wsgi-script
+    WSGIProcessGroup koji
     WSGIApplicationGroup %{GLOBAL}
     # ^ works around an OpenSSL issue
     # see: https://cryptography.io/en/latest/faq/#starting-cryptography-using-mod-wsgi-produces-an-internalerror-during-a-call-in-register-osrandom-engine
