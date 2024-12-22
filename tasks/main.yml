@@ -53,6 +53,16 @@
   notify:
     - restart_httpd
 
+- name: Create httpd memory override
+  ansible.builtin.copy:
+    src: "etc/systemd/system/httpd.service.d/httpd-override.conf"
+    dest: "/etc/systemd/system/httpd.service.d/httpd-override.conf"
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart_httpd
+
 - name: Configure robots.txt
   ansible.builtin.copy:
     src: "var/www/html/robots.txt"
@@ -63,14 +73,8 @@
   notify:
     - restart_httpd
 
-- name: Deploy custom theme for koji
-  ansible.builtin.unarchive:
-    src: "{{ koji_theme_file }}"
-    dest: /
-  when: koji_theme
-
-- name: Configure garbage collector
-  import_tasks: koji-gc.yml
+# - name: Configure garbage collector
+#   import_tasks: koji-gc.yml
 
 - name: User Sync from FAS
   import_tasks: user-sync.yml
