@@ -1,5 +1,4 @@
 ---
-# ansible default variables - most variables live here
 koji_hub_packages:
   - koji
   - koji-hub
@@ -13,6 +12,9 @@ koji_hub_packages:
   - mod_ssl
   - mod_auth_gssapi
   - sigul
+  - postgresql
+  - python3-psycopg2
+  - python3-requests-gssapi
 
 koji_default_directories:
   - packages

@@ -1,28 +1,41 @@
 ---
-# Koji hub and web installation
-# This is not for builder nodes
-
-- name: Apply required SELinux booleans
-  import_tasks: selinux_boolean.yml
-
-- name: Ensure Storage is ready
-  import_tasks: storage.yml
-
 - name: Install required packages
   ansible.builtin.dnf:
     name: "{{ koji_hub_packages }}"
     state: present
+  tags:
+    - packages
+    - hub
+
+- name: Apply required SELinux booleans
+  import_tasks: selinux_boolean.yml
+  tags:
+    - selinux
+    - config
+
+- name: Ensure Storage is ready
+  import_tasks: storage.yml
+  tags:
+    - storage
 
 - name: Configure koji database
   import_tasks: db.yml
+  tags:
+    - db
 
 - name: Configure local koji admin
   import_tasks: koji-admin-local.yml
   when: koji_admin_client
+  tags:
+    - config
 
 - name: Configure plugins
   import_tasks: plugins.yml
   when: koji_hub_plugins
+  tags:
+    - plugins
+    - config
+    - hub
 
 - name: Configure kojihub and web
   ansible.builtin.template:
@@ -36,9 +49,16 @@
     - etc/kojiweb/web.conf
   notify:
     - restart_httpd
+  tags:
+    - config
+    - hub
 
 - name: Configure kojira
   import_tasks: kojira.yml
+  tags:
+    - config
+    - hub
+    - kojira
 
 - name: Configure httpd for hub and web
   ansible.builtin.template:
@@ -52,6 +72,9 @@
     - kojiweb.conf
   notify:
     - restart_httpd
+  tags:
+    - config
+    - hub
 
 - name: Create httpd memory override
   ansible.builtin.copy:
@@ -62,6 +85,9 @@
     mode: '0644'
   notify:
     - restart_httpd
+  tags:
+    - config
+    - hub
 
 - name: Configure robots.txt
   ansible.builtin.copy:
@@ -72,10 +98,13 @@
     mode: '0644'
   notify:
     - restart_httpd
+  tags:
+    - config
+    - hub
 
 # - name: Configure garbage collector
 #   import_tasks: koji-gc.yml
 
-- name: User Sync from FAS
-  import_tasks: user-sync.yml
-  when: koji_fas_sync
+# - name: User Sync from FAS
+#   import_tasks: user-sync.yml
+#   when: koji_fas_sync

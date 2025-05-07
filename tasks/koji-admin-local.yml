@@ -38,11 +38,3 @@
     group: "{{ koji_admin_localuser_name }}"
     mode: '0750'
     recurse: true
-
-# name: Cron job to rebuild repos
-# cron:
-#   name: "Regenerate repos"
-#   job: "/opt/rocky-tools/scripts/regen_build_repos.sh > /dev/null 2>&1"
-#   minute: "5"
-#   hour: "3"
-#   user: "{{ koji_admin_localuser_name }}"
