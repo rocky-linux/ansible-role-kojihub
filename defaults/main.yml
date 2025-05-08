@@ -96,9 +96,12 @@ koji_fas_sync: false
 koji_fas_url: https://accounts.rockylinux.org
 
 # Koji Plugins
-koji_hub_plugins: false
+koji_hub_plugins: true
 koji_hub_plugins_list:
-  - key_signing
+  - kiwi
+  - runroot_hub
+  - sidetag_hub
+  - tag2distrepo
 
 koji_hub_plugin_key_gpg_keyphrase: lol
 koji_hub_plugin_key_gpg_name: testing-signing
