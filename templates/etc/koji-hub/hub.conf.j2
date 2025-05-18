@@ -46,6 +46,9 @@ DisableNotifications = True
 Plugins = {% for plugin in koji_hub_plugins_list + koji_hub_noconfig_plugins_list %}{{ plugin }} {% endfor %}
 {% endif %}
 
+MaxRepoTasks = 30
+#RunInterval = 1
+
 ## If KojiDebug is on, the hub will be /very/ verbose and will report exception
 ## details to clients for anticipated errors (i.e. koji's own exceptions --
 ## subclasses of koji.GenericError).
@@ -106,8 +109,3 @@ build_from_scm =
         match scm_repository /src-modules/* :: allow rockyget
     }
     all :: deny
-
-scm =
-    bool scratch :: allow
-    match_all branches * !! deny Commit must be present on a branch
-    all :: allow
