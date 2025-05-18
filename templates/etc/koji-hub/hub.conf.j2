@@ -71,16 +71,27 @@ Plugins = {% for plugin in koji_hub_plugins_list + koji_hub_noconfig_plugins_lis
 
 [policy]
 tag =
+    is_draft :: deny
+    has_perm secureboot && package kernel shim grub2 pesign fwupd fwupd-efi :: allow
     all :: allow
+
+channel =
+    source */kernel* && has_perm secureboot :: use secureboot
+    source */shim* && has_perm secureboot :: use secureboot
+    source */grub2* && has_perm secureboot :: use secureboot
+    source */fwupdate* && has_perm secureboot :: use secureboot
+    source */fwupd* && has_perm secureboot :: use secureboot
+    source */fwupd-efi* && has_perm secureboot :: use secureboot
 
 package_list =
     match action remove :: deny
     has_perm admin :: allow
-    all :: deny
 
 build_from_srpm =
       tag * :: allow
+      has_perm admin :: allow
       has_perm build :: allow
+      all :: deny
 
 build_from_scm =
     match scm_host git.rockylinux.org :: {
@@ -96,8 +107,7 @@ build_from_scm =
     }
     all :: deny
 
-#scm =
-#      # allow scratch builds from any commits
-#      bool scratch :: allow
-#      match_all branches * !! deny Commit must be present on some branch
-#      all :: allow
+scm =
+    bool scratch :: allow
+    match_all branches * !! deny Commit must be present on a branch
+    all :: allow
