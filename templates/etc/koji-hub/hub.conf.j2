@@ -90,6 +90,9 @@ channel =
     source */fwupd* && has_perm secureboot :: use secureboot
     source */fwupd-efi* && has_perm secureboot :: use secureboot
 
+    # for some reason new repo tasks are going everywhere
+    method newRepo :: use createrepo
+
     is_child_task :: parent
     # everything else uses the default
     all :: use default
