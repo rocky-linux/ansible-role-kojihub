@@ -79,12 +79,20 @@ tag =
     all :: allow
 
 channel =
+    # scratch builds go to the default channel
+    method build && bool scratch :: use default
+
+    # secure boot goes to a specific group
     source */kernel* && has_perm secureboot :: use secureboot
     source */shim* && has_perm secureboot :: use secureboot
     source */grub2* && has_perm secureboot :: use secureboot
     source */fwupdate* && has_perm secureboot :: use secureboot
     source */fwupd* && has_perm secureboot :: use secureboot
     source */fwupd-efi* && has_perm secureboot :: use secureboot
+
+    is_child_task :: parent
+    # everything else uses the default
+    all :: use default
 
 package_list =
     match action remove :: deny
