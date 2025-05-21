@@ -47,7 +47,10 @@ Plugins = {% for plugin in koji_hub_plugins_list + koji_hub_noconfig_plugins_lis
 {% endif %}
 
 MaxRepoTasks = 30
-#RunInterval = 1
+RunInterval = 15
+MaxRequestLength = 167772160
+RLIMIT_AS = 10737418240
+MemoryWarnThreshold = 10000
 
 ## If KojiDebug is on, the hub will be /very/ verbose and will report exception
 ## details to clients for anticipated errors (i.e. koji's own exceptions --
