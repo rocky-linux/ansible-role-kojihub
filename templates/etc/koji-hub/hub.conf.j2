@@ -96,6 +96,9 @@ channel =
     # for some reason new repo tasks are going everywhere
     method newRepo :: use createrepo
 
+    # for some reason runroot tasks are going everywhere
+    method runroot :: use runroot
+
     is_child_task :: parent
     # everything else uses the default
     all :: use default
