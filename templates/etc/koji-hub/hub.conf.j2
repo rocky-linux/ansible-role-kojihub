@@ -125,4 +125,7 @@ build_from_scm =
         match scm_repository /modules/* :: allow rockyget
         match scm_repository /src-modules/* :: allow rockyget
     }
+    match scm_host git.resf.org :: {
+        match scm_repository /sig_core/rocky-kiwi-descriptions.git :: allow
+    }
     all :: deny
