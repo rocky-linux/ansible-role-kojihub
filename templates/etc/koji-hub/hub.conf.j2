@@ -98,6 +98,9 @@ channel =
 
     # for some reason runroot tasks are going everywhere
     method runroot :: use runroot
+    method createKiwiImage :: use image
+    method kiwiBuild :: use image
+    method osbuildImage :: use image
 
     is_child_task :: parent
     # everything else uses the default
