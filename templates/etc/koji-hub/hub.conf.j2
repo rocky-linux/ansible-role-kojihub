@@ -78,7 +78,7 @@ MemoryWarnThreshold = 10000
 [policy]
 tag =
     is_draft :: deny
-    has_perm secureboot && package kernel shim grub2 pesign fwupd fwupd-efi :: allow
+    has_perm secureboot && package kernel kernel-rt shim shim-unsigned-x64 shim-unsigned-aarch64 grub2 pesign fwupd fwupd-efi :: allow
     all :: allow
 
 channel =
@@ -119,9 +119,12 @@ build_from_srpm =
 build_from_scm =
     match scm_host git.rockylinux.org :: {
         bool scratch :: allow rockyget
+        # Old gitlab references
         match scm_repository /staging/rpms/* :: allow rockyget
         match scm_repository /staging/modules/* :: allow rockyget
         match scm_repository /staging/src/* :: allow rockyget
+        # New forgejo references
+        # This will pick up SIG data too, no ansible jinja required here
         match scm_repository /rpms/* :: allow rockyget
         match scm_repository /src-rpms/* :: allow rockyget
         match scm_repository /src/* :: allow rockyget
